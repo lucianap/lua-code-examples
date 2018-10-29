@@ -12,11 +12,11 @@ sin(10, 20)
 
 -- Syntactic sugar
 function foo (x)
-return 2*x
+	return 2*x
 end
 -- es igual a
 foo = function (x)
-return 2*x
+	return 2*x
 end
 
 -- -------------------------------------------------
