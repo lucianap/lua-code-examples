@@ -1,6 +1,7 @@
 require 'map-functions'
 local SpriteSheet = require 'SpriteSheet'
 local Tv = require 'Objects.Tv'
+local Tel = require 'Objects.Phone'
 
 local ANIMATION_UP = 1
 local ANIMATION_LEFT = 2
@@ -12,18 +13,30 @@ local STEP = 1
 function love.load()
   loadMap('maps/map3.lua')
   currentAnimation = loadCharacterSpriteSheet()
-  position = {x = 0 * framewidth, y = 0 * framewidth}
+  position = {x = 1 * framewidth, y = 1 * framewidth}
   
-  teve = Tv.new({x=4*32, y=7*32})
+  objects = {
+  	teve = Tv.new({x=4*32, y=7*32}),
+  	tel = Tel.new({x=2*32, y=0})
+  }
+  
+
+  love.window.setMode(900, 600, {resizable=true})
 
   message = "LUA GAME"
 
 end
 
 function love.draw()
+	love.graphics.scale(2, 2)   -- aumenta la escala de dibujo en 7%
 	drawMap()
 	drawCharacter(currentAnimation, position)
-	teve:draw()
+
+
+	for objectName, obj in pairs(objects) do
+		obj:draw()
+	end
+
 	font = love.graphics.newFont(50) 
 	love.graphics.setFont(font)
 	love.graphics.print(message, 10, 400)
@@ -55,7 +68,8 @@ function love.update(dt)
 	  	for k,v in ipairs(Animations) do v:update(dt) end
 	end
 
-	if isDown('s') then
+	-- position info
+	if isDown('i') then
 		print(getTile(newPosition))
 		print("POSITION x: ".. math.floor(position.x/32).." y: ".. math.floor(position.y/32))
 		print("NEW POSITION x: ".. math.floor(newPosition.x/32).." y: ".. math.floor(newPosition.y/32))
@@ -65,38 +79,66 @@ function love.update(dt)
 	
 	position = newPosition 
 
+
+
   	-- collideWith(teve)
 end
 
-
-
-function collideWith(object)
-
+function collideWithNormal(object)
+	local obj = object
 	if(currentAnimation == ANIMATION_RIGHT) then
-  		print("looking right")
-  		if(math.floor(newPosition.x/32) + 2 == math.floor(object.position.x/32) and math.floor(newPosition.y/32) == math.floor(object.position.y/32)) then
-			message = object:interact()
+  		if(math.floor(newPosition.x/32) == math.floor(obj.position.x/32) and math.floor(newPosition.y/32) == math.floor(obj.position.y/32)) then
+			message = obj:interact()
 		end
 	elseif(currentAnimation == ANIMATION_LEFT) then
-		print("looking left")
-		if(math.floor(newPosition.x/32) == math.floor(object.position.x/32) and math.floor(newPosition.y/32) == math.floor(object.position.y/32)) then
-			message = object:interact()
+		if(math.floor(newPosition.x/32) == math.floor(obj.position.x/32) and math.floor(newPosition.y/32) == math.floor(obj.position.y/32)) then
+			message = obj:interact()
 		end
 	elseif(currentAnimation == ANIMATION_UP) then
-		print("looking up")
-		if(math.floor(newPosition.x/32) + 1 == math.floor(object.position.x/32) and math.floor(newPosition.y/32) - 1 == math.floor(object.position.y/32)) then
-			message = object:interact()
+		if(math.floor(newPosition.x/32) == math.floor(obj.position.x/32) and math.floor(newPosition.y/32) - 2 == math.floor(obj.position.y/32)) then
+			message = obj:interact()
 		end
 	elseif(currentAnimation == ANIMATION_DOWN) then
-		print("looking down")
-		if(math.floor(newPosition.x/32) + 1 == math.floor(object.position.x/32) and math.floor(newPosition.y/32) + 1 == math.floor(object.position.y/32)) then
-			message = object:interact()
+		if(math.floor(newPosition.x/32) == math.floor(obj.position.x/32) and math.floor(newPosition.y/32) + 2 == math.floor(obj.position.y/32)) then
+			message = obj:interact()
 		end
 	end
 end
+
+function collideWith(object)
+	local obj = object
+	if(currentAnimation == ANIMATION_RIGHT) then
+  		if(math.floor(newPosition.x/32) + 2 == math.floor(obj.position.x/32) and math.floor(newPosition.y/32) == math.floor(obj.position.y/32)) then
+			message = obj:interact()
+		end
+	elseif(currentAnimation == ANIMATION_LEFT) then
+		if(math.floor(newPosition.x/32) == math.floor(obj.position.x/32) and math.floor(newPosition.y/32) == math.floor(obj.position.y/32)) then
+			message = obj:interact()
+		end
+	elseif(currentAnimation == ANIMATION_UP) then
+		if(math.floor(newPosition.x/32) + 1 == math.floor(obj.position.x/32) and math.floor(newPosition.y/32) - 1 == math.floor(obj.position.y/32)) then
+			message = obj:interact()
+		end
+	elseif(currentAnimation == ANIMATION_DOWN) then
+		if(math.floor(newPosition.x/32) + 1 == math.floor(obj.position.x/32) and math.floor(newPosition.y/32) + 2 == math.floor(obj.position.y/32)) then
+			message = obj:interact()
+		end
+	end
+end
+
 function love.keypressed(key)
    if key == "return" then
-   		collideWith(teve)
+   		for objectName, obj in pairs(objects) do
+			print(objectName)
+			print(obj)
+			collideWith(obj)
+			collideWithNormal(obj)
+		end
+   	elseif key == "s" then
+   		-- speed the guy up
+   		STEP = 2
+   	elseif key == "l" then
+   		STEP = 1
    end
 end
 

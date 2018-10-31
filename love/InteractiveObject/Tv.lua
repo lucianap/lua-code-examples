@@ -1,28 +1,23 @@
-local SpriteIntObj = require "InteractiveObject"
+local InteractiveObject = require "InteractiveObject"
 
-local Tv={}
-Tv.__index=Tv
+local framewidth = 32
+local frameheight = 32
+local Tv = InteractiveObject:new('more-tiles.png', 32, 62, 11 * framewidth, 3 * (frameheight+2))
+
+local anuncios = {"TV: Se anuncia tiempo nublado.",
+                  "TV: La línea E funciona con demoras.",
+                  "TV: No hay futuro.",
+                  "TV: ...."}
 
 function Tv.new(position)
-	local img='more-tiles.png'
-  	framewidth=32
-  	frameheight=32
-  	S=SpriteIntObj.new(img, framewidth, frameheight)
-  	obj = S:createInteractiveObject()
-  	obj:setQuad(11 * framewidth,3 * frameheight, 32, 67)
-  	obj.position = position
-  	return obj
-end
-
-function Tv:draw()
-	obj:draw(position.x, position.y)
+  Tv.position = position
+  Tv.i = 0
+  return Tv
 end
 
 function Tv:interact()
-	print("inside f")
-	love.graphics.setColor(0, 1, 0, 1)
-    return "TV: Se anuncia tiempo nublado."
+  local i = 1
+  return function () anuncio = anuncios[i]; i = i + 1; if(i > 3) then i = 1 end; return anuncio end
 end
-
 
 return Tv

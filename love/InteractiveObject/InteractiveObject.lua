@@ -1,43 +1,42 @@
-local lg=love.graphics
+local lg = love.graphics
 
-local InteractiveObject={}
-InteractiveObject.__index=InteractiveObject
+local InteractiveObject = {}
+InteractiveObject.__index = InteractiveObject
 
-function InteractiveObject.new(spritesheet)
-  local obj={parent=spritesheet, name=name}
-  return setmetatable(obj, InteractiveObject)
+function InteractiveObject:new(imgPath, w, h, col, row) 
+
+  if type(imgPath)=='string' then
+    img=lg.newImage(imgPath)
+  end
+
+  imgWidth = img:getWidth()
+  imgHeight = img:getHeight()
+  local quad = getQuad(col, row, w, h, imgWidth, imgHeight)
+  local mt={img = img, 
+            imgw = imgWidth, 
+            imgh = imgHeight, 
+            width = w, 
+            height = h, 
+            name=name, 
+            position = {x = 0, y = 0},
+            quad = quad
+          }
+          
+  return setmetatable(mt, InteractiveObject)
+
 end
 
-function InteractiveObject:draw(x, y)
-  local quad=self.quad
-  if quad then
-    lg.draw(self.parent.img, quad, x, y)
+function InteractiveObject:draw()
+  local myQuad=self.quad
+  if myQuad then
+    lg.draw(self.img, myQuad, self.position.x, self.position.y)
   end
 end
 
-function InteractiveObject:setQuad(col, row, w, h)
-  local parent=self.parent
-  local quad=lg.newQuad((col-1), (row-1), w, h, parent.imgw, parent.imgh)
-  self.quad=quad
-  return self
+function getQuad(col, row, width, height, imgw, imgh)
+  local quad=lg.newQuad((col-1), (row-1), width, height, imgw, imgh)
+  return quad
 end
 
-local SpriteSheet={}
-SpriteSheet.__index=SpriteSheet
 
-function SpriteSheet.new(img, w, h)
-  if type(img)=='string' then
-    img=lg.newImage(img)
-  end
-  local obj={img=img, w=w, h=h, InteractiveObj={}}
-  obj.imgw=img:getWidth()
-  obj.imgh=img:getHeight()
-  return setmetatable(obj, SpriteSheet)
-end
-
-function SpriteSheet:createInteractiveObject(...)
-  local a=InteractiveObject.new(self)
-  return a
-end
-
-return SpriteSheet
+return InteractiveObject
