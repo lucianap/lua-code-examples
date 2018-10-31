@@ -11,11 +11,8 @@ function Tv.new(position)
   	obj = S:createInteractiveObject()
   	obj:setQuad(11 * framewidth,3 * frameheight, 32, 64)
   	obj.position = position
+  	obj.message = "Se anuncia tiempo nublado."
   	return obj
-end
-
-function Tv:draw()
-	obj:draw(position.x, position.y)
 end
 
 return Tv

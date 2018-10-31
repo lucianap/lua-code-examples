@@ -18,4 +18,11 @@ function Tv:draw()
 	obj:draw(position.x, position.y)
 end
 
+function Tv:interact()
+	print("inside f")
+	love.graphics.setColor(0, 1, 0, 1)
+    return "TV: Se anuncia tiempo nublado."
+end
+
+
 return Tv

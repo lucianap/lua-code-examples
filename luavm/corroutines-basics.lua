@@ -7,3 +7,4 @@ print(coroutine.status(co))
 
 -- Ejecutar
 coroutine.resume(co)
+

@@ -63,8 +63,8 @@ end
 function getTile( position )
   tx, ty = posToTile(position.x, position.y)
   print("got to: "..tx..","..ty)
-  print(tileTable[tx][ty])
-  if(tileTable[tx] ~= nil) then return tileTable[tx][ty] end
+  -- print(tileTable[tx-1][ty-1])
+  if(tileTable[tx+2] ~= nil) then return tileTable[tx+2][ty+2] end
   return " "  
 end
 

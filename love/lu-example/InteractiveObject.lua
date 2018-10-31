@@ -4,7 +4,7 @@ local InteractiveObject={}
 InteractiveObject.__index=InteractiveObject
 
 function InteractiveObject.new(spritesheet)
-  local obj={parent=spritesheet, name=name, position = {x = 1, y = 1}}
+  local obj={parent=spritesheet, name=name, position = {x = 1, y = 1}, message = ""}
   return setmetatable(obj, InteractiveObject)
 end
 
@@ -20,6 +20,11 @@ function InteractiveObject:setQuad(col, row, w, h)
   local quad=lg.newQuad((col-1), (row-1), w, h, parent.imgw, parent.imgh)
   self.quad=quad
   return self
+end
+
+function InteractiveObject:interact()
+  print("mess: "..self.message)
+  return self.message
 end
 
 local SpriteSheet={}
