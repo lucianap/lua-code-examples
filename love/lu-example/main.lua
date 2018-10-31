@@ -10,6 +10,10 @@ local ANIMATION_RIGHT = 4
 
 local STEP = 1
 
+-- TODO:
+-- fix del bug por el cual el equeleto no se dibuja apenas arranca.
+local FIRST = 0
+
 function love.load()
   loadMap('maps/map3.lua')
   currentAnimation = loadCharacterSpriteSheet()
@@ -23,27 +27,36 @@ function love.load()
 
   love.window.setMode(900, 600, {resizable=true})
 
-  message = "LUA GAME"
+  message = " { LUA GAME } "
 
 end
 
 function love.draw()
 	love.graphics.scale(2, 2)   -- aumenta la escala de dibujo en 7%
 	drawMap()
+	
 	drawCharacter(currentAnimation, position)
 
+	if(FIRST == 0) then
+		FIRST = 1
+		currentAnimation = ANIMATION_RIGHT
+		for k,v in ipairs(Animations) do 
+			v:update(0.1) 
+		end
+	end
 
 	for objectName, obj in pairs(objects) do
 		obj:draw()
 	end
 
-	font = love.graphics.newFont(50) 
+	font = love.graphics.newFont(30) 
 	love.graphics.setFont(font)
 	love.graphics.print(message, 10, 400)
+
 end
 
 function love.update(dt)
-	
+
 	newPosition = position
 	local isDown=love.keyboard.isDown
 	if isDown('right') then

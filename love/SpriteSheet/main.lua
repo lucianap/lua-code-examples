@@ -28,6 +28,8 @@ function love.update(dt)
 end
 
 function love.draw()
+  love.graphics.scale(4, 4)   -- aumenta la escala de dibujo en 7%
+
   for k,v in ipairs(Animations) do
     v:draw(k*framewidth, 0)
     if k==selected then
