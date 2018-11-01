@@ -1,7 +1,10 @@
 require 'map-functions'
+require 'collision-detection'
 local SpriteSheet = require 'SpriteSheet'
 local Tv = require 'Objects.Tv'
 local Tel = require 'Objects.Phone'
+local Leandro = require 'Objects.Leandro'
+local Switch = require 'Objects.Switch'
 
 local ANIMATION_UP = 1
 local ANIMATION_LEFT = 2
@@ -12,19 +15,22 @@ local STEP = 1
 
 -- TODO:
 -- fix del bug por el cual el equeleto no se dibuja apenas arranca.
-local FIRST = 0
+local FIRST_FRAME = 0
 
 function love.load()
   loadMap('maps/map3.lua')
   currentAnimation = loadCharacterSpriteSheet()
   position = {x = 1 * framewidth, y = 1 * framewidth}
+  characterDimensions = {h = 64, w = 64}
   
   objects = {
   	teve = Tv.new({x=4*32, y=7*32}),
-  	tel = Tel.new({x=2*32, y=0})
+  	tel = Tel.new({x=2*32, y=0}),
+  	leandro = Leandro.new({x=7*32,y=2*32}),
+  	switch = Switch.new({x=5*32, y=0})
   }
   
-
+  
   love.window.setMode(900, 600, {resizable=true})
 
   message = " { LUA GAME } "
@@ -32,13 +38,14 @@ function love.load()
 end
 
 function love.draw()
-	love.graphics.scale(2, 2)   -- aumenta la escala de dibujo en 7%
+	love.graphics.scale(2, 2)   -- aumenta la escala de dibujo en 2%
 	drawMap()
 	
 	drawCharacter(currentAnimation, position)
 
-	if(FIRST == 0) then
-		FIRST = 1
+	-- FIXME 
+	if(FIRST_FRAME == 0) then
+		FIRST_FRAME = 1
 		currentAnimation = ANIMATION_RIGHT
 		for k,v in ipairs(Animations) do 
 			v:update(0.1) 
@@ -56,7 +63,6 @@ function love.draw()
 end
 
 function love.update(dt)
-
 	newPosition = position
 	local isDown=love.keyboard.isDown
 	if isDown('right') then
@@ -80,7 +86,6 @@ function love.update(dt)
 	  	message = ""
 	  	for k,v in ipairs(Animations) do v:update(dt) end
 	end
-
 	-- position info
 	if isDown('i') then
 		print(getTile(newPosition))
@@ -88,64 +93,26 @@ function love.update(dt)
 		print("NEW POSITION x: ".. math.floor(newPosition.x/32).." y: ".. math.floor(newPosition.y/32))
 		print("TV x: ".. math.floor(teve.position.x/32).." y: ".. math.floor(teve.position.y/32))
 	end	
-
-	
 	position = newPosition 
-
-
-
-  	-- collideWith(teve)
 end
 
-function collideWithNormal(object)
-	local obj = object
-	if(currentAnimation == ANIMATION_RIGHT) then
-  		if(math.floor(newPosition.x/32) == math.floor(obj.position.x/32) and math.floor(newPosition.y/32) == math.floor(obj.position.y/32)) then
-			message = obj:interact()
-		end
-	elseif(currentAnimation == ANIMATION_LEFT) then
-		if(math.floor(newPosition.x/32) == math.floor(obj.position.x/32) and math.floor(newPosition.y/32) == math.floor(obj.position.y/32)) then
-			message = obj:interact()
-		end
-	elseif(currentAnimation == ANIMATION_UP) then
-		if(math.floor(newPosition.x/32) == math.floor(obj.position.x/32) and math.floor(newPosition.y/32) - 2 == math.floor(obj.position.y/32)) then
-			message = obj:interact()
-		end
-	elseif(currentAnimation == ANIMATION_DOWN) then
-		if(math.floor(newPosition.x/32) == math.floor(obj.position.x/32) and math.floor(newPosition.y/32) + 2 == math.floor(obj.position.y/32)) then
-			message = obj:interact()
-		end
+
+function isColliding(object)
+	if object then
+		characterRectangle = {x = position.x, y = position.y, w = characterDimensions.w, h = characterDimensions.h}
+		objectRectangle = {x = object.position.x, y = object.position.y, w = object.width, h = object.height}
+		return collide(characterRectangle, objectRectangle)
 	end
+	return false
 end
-
-function collideWith(object)
-	local obj = object
-	if(currentAnimation == ANIMATION_RIGHT) then
-  		if(math.floor(newPosition.x/32) + 2 == math.floor(obj.position.x/32) and math.floor(newPosition.y/32) == math.floor(obj.position.y/32)) then
-			message = obj:interact()
-		end
-	elseif(currentAnimation == ANIMATION_LEFT) then
-		if(math.floor(newPosition.x/32) == math.floor(obj.position.x/32) and math.floor(newPosition.y/32) == math.floor(obj.position.y/32)) then
-			message = obj:interact()
-		end
-	elseif(currentAnimation == ANIMATION_UP) then
-		if(math.floor(newPosition.x/32) + 1 == math.floor(obj.position.x/32) and math.floor(newPosition.y/32) - 1 == math.floor(obj.position.y/32)) then
-			message = obj:interact()
-		end
-	elseif(currentAnimation == ANIMATION_DOWN) then
-		if(math.floor(newPosition.x/32) + 1 == math.floor(obj.position.x/32) and math.floor(newPosition.y/32) + 2 == math.floor(obj.position.y/32)) then
-			message = obj:interact()
-		end
-	end
-end
+	
 
 function love.keypressed(key)
    if key == "return" then
    		for objectName, obj in pairs(objects) do
-			print(objectName)
-			print(obj)
-			collideWith(obj)
-			collideWithNormal(obj)
+   			if(isColliding(obj)) then
+   				message = obj:interact()
+   			end
 		end
    	elseif key == "s" then
    		-- speed the guy up
@@ -155,7 +122,8 @@ function love.keypressed(key)
    end
 end
 
-MainCharacter = {}
+Protagonist = {}
+Protagonist.__index = Protagonist
 
 function drawCharacter(currentAnimation, position)	
 	Animations[currentAnimation]:draw(position.x, position.y)
