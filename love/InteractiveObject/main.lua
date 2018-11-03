@@ -4,7 +4,6 @@ local Tel = require "Phone"
 
 function love.load()
 	teve = Tv.new({x = 20, y = 1})
-	tel = Tel.new({x = 12, y = 2})
 	message = "no message"
 
 	-- Crea una clausura del objeto
@@ -21,7 +20,6 @@ end
 function love.draw()
 	love.graphics.scale(7, 7)   -- aumenta la escala de dibujo en 7%
 	teve:draw() 
-	tel:draw()
 	love.graphics.print(message, 1, 80)
 end
 

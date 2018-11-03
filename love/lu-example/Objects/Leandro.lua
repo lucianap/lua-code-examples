@@ -7,8 +7,8 @@ local frameheight = 32
 local Leandro = InteractiveObject:new('more-tiles.png', 32, 64, 14 * (framewidth), 14 * (frameheight - 1))
 
 local anuncios = {"Skeleton: Cuál es tu lenguaje preferido?",
-				  "Leandro: Perl",
-				  "Leandro: Me encanta perl."}
+				  "Leandro: LUA",
+				  "Leandro: Me encanta Lua."}
 
 function Leandro.new(position)
   Leandro.position = position

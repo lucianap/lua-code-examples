@@ -28,6 +28,10 @@ end
 mt.__add = Vector.sum -- Le enseña a sumar a los vectores
 mt.__sub = Vector.sub
 
+vector1 = Vector.new({1,2,3})
+vector2 = Vector.new({3,4,5})
+vector1 + vector2
+
 -- ############################################################ 
 
 -- Table-Access Metamethods
@@ -46,15 +50,16 @@ Window.mt.__index = function (table, key) -- creación del metamethod index
 	return Window.prototype[key]
 end
 
-w = Window.new{x=10, y=20} -- los campos width y height quedan con los valores default
+w = Window.new({x=10, y=20}) -- los campos width y height quedan con los valores default
+
 print(w.width)
 
 -- ------------------------------------------------------------
 -- Proxy para controlar accesos con __index y __newindex
 t = {} -- original table (created somewhere)
 
--- keep a private access to the original table
-local _t = t
+
+local _t = t                -- keep a private access to the original table
 t = {} 						-- create proxy
 local mt = { 				-- create metatable
 	__index = function (t, k)

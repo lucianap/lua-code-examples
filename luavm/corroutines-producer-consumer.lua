@@ -1,14 +1,14 @@
 -- Problema del productor consumidor
-   function receive (prod)
+   function receive(prod)
       local status, value = coroutine.resume(prod)
       return value
     end
     
-    function send (x)
+    function send(x)
       coroutine.yield(x)
     end
     
-    function producer ()
+    function producer()
       return coroutine.create(function ()
         while true do
           local x = io.read()     -- produce new value
@@ -17,7 +17,7 @@
       end)
     end
     
-    function filter (prod)
+    function filter(prod)
       return coroutine.create(function ()
         local line = 1
         while true do
@@ -29,7 +29,7 @@
       end)
     end
     
-    function consumer (prod)
+    function consumer(prod)
       while true do
         local x = receive(prod)   -- get new value
         io.write(x, "\n")          -- consume new value

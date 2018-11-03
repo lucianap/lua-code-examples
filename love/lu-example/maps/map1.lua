@@ -7,6 +7,8 @@ local tileString = [[
 #                ###  ###
 #  L[]R   L[]R          #
 #  L()R   L()R    L[]R  #
+#  L()R   L()R    L[]R  #
+#  L()R   L()R    L[]R  #
 #                 L()R  #
 #                       #
 #  L[]R   L[]R          #
