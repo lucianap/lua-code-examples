@@ -28,10 +28,6 @@ end
 mt.__add = Vector.sum -- Le enseña a sumar a los vectores
 mt.__sub = Vector.sub
 
-vector1 = Vector.new({1,2,3})
-vector2 = Vector.new({3,4,5})
-vector1 + vector2
-
 -- ############################################################ 
 
 -- Table-Access Metamethods
@@ -57,7 +53,6 @@ print(w.width)
 -- ------------------------------------------------------------
 -- Proxy para controlar accesos con __index y __newindex
 t = {} -- original table (created somewhere)
-
 
 local _t = t                -- keep a private access to the original table
 t = {} 						-- create proxy

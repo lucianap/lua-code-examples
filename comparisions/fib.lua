@@ -1,4 +1,4 @@
-- Author: Michael-Keith Bernard
+-- Author: Michael-Keith Bernard
 -- Date: May 22, 2012
 -- Description: Various implementations of the Fibonacci sequence in Lua. Lua
 -- has native support for tail-call elimination which is why `tail_call` and
@@ -23,31 +23,12 @@ end
 
 -- Iterative
 function Fibonacci.iterative(n)
-  a, b = 0, 1
+  local a, b = 0, 1
 
   for i = 1, n do
     a, b = b, a + b
   end
   return a
-end
-
--- Memoized naive recursive
-function Fibonacci.memoized(n)
-  local memo = {}
-  local function inner(m)
-    if m < 2 then
-      return m
-    end
-
-    if memo[m] then
-      return memo[m]
-    else
-      local res = inner(m-1) + inner(m-2)
-      memo[m] = res
-      return res
-    end
-  end
-  return inner(n)
 end
 
 -- Tail-optimized recursive
@@ -61,34 +42,21 @@ function Fibonacci.tail_call(n)
   return inner(n, 0, 1)
 end
 
--- Continuation passing style
-function Fibonacci.continuation(n)
-  local function inner(m, cont)
-    if m == 0 then
-      return cont(0, 1)
-    end
-    return inner(m-1, function(a, b) return cont(b, a+b) end)
-  end
-  return inner(n, function(a, b) return a end)
-end
-
 function timeit(f, ...)
-  local start = os.time()
+  local start = os.clock()
   local res = { f(...) }
-  local delta = os.time() - start
+  local delta = os.clock() - start
   
   return delta, unpack(res)
 end
 
-for _, n in ipairs({10, 25, 35, 100, 1000, 5000, 100000, 1000000, 5000000}) do
-  print("Fib of "..n)
-  for name, fibfun in pairs(Fibonacci) do
-    if name == "naive" and n > 35 then
-      print(string.format("  %s, time: %s, %s", name, "skipped", "skipped"))
-    elseif name == "memoized" and n > 5000 then
-      print(string.format("  %s, time: %s, %s", name, "skipped", "skipped"))
-    else
-      print(string.format("  %s, time: %s, %s", name, timeit(fibfun, n)))
-    end
-  end
-end
+
+delta, result = timeit(Fibonacci.naive, 35)
+print("Naive fib(35): "..(delta * 1000).." ms")
+
+delta, result = timeit(Fibonacci.iterative, 350)
+print("It fib(350): "..(delta * 1000).." ms")
+
+delta, result = timeit(Fibonacci.tail_call, 350)
+print("Tail rec fib(350): "..(delta * 1000).." ms")
+

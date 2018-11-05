@@ -4,3 +4,4 @@ Lua Ref Manual https://www.lua.org/manual/5.3/
 LLVM and Lua http://terralang.org/
 History of Programming languages https://en.wikipedia.org/wiki/History_of_programming_languages
 Scripting and Extension Languages https://www.gnu.org/software/guile/docs/master/guile-tut.html/What-are-scripting-and-extension-languages.html
+Sobre el diseño de lua: https://cacm.acm.org/magazines/2018/11/232214-a-look-at-the-design-of-lua/fulltext
