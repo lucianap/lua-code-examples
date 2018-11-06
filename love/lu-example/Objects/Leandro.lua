@@ -4,7 +4,7 @@ local framewidth = 32
 local frameheight = 32
 
 -- Donde efectivamente se ejecuta la herencia
-local Leandro = InteractiveObject:new('more-tiles.png', 32, 64, 14 * (framewidth), 14 * (frameheight - 1))
+local Leandro = InteractiveObject:new('more-tiles.png', 32, 42, 14 * (framewidth), 14 * (frameheight - 1))
 
 local anuncios = {"Skeleton: Cuál es tu lenguaje preferido?",
 				  "Leandro: LUA",

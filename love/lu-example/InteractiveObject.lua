@@ -12,7 +12,7 @@ function InteractiveObject:new(imgPath, w, h, col, row)
   imgWidth = img:getWidth()
   imgHeight = img:getHeight()
   local quad = getQuad(col, row, w, h, imgWidth, imgHeight)
-  local mt={img = img, 
+  local t={img = img, 
             imgw = imgWidth, 
             imgh = imgHeight, 
             width = w, 
@@ -22,7 +22,7 @@ function InteractiveObject:new(imgPath, w, h, col, row)
             quad = quad
           }
           
-  return setmetatable(mt, InteractiveObject)
+  return setmetatable(t, InteractiveObject)
 
 end
 

@@ -93,9 +93,19 @@ function love.update(dt)
 		print("NEW POSITION x: ".. math.floor(newPosition.x/32).." y: ".. math.floor(newPosition.y/32))
 		print("TV x: ".. math.floor(teve.position.x/32).." y: ".. math.floor(teve.position.y/32))
 	end	
+	
 	position = newPosition 
+
 end
 
+function isCollidingWithAnyObject(allObjects)
+	for objectName, obj in pairs(allObjects) do
+   			if(isColliding(obj)) then
+   				return true
+   			end
+		end
+	return false
+end
 
 function isColliding(object)
 	if object then
