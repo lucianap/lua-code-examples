@@ -17,23 +17,34 @@ local STEP = 1
 -- fix del bug por el cual el equeleto no se dibuja apenas arranca.
 local FIRST_FRAME = 0
 
-function love.load()
-  loadMap('maps/map3.lua')
-  currentAnimation = loadCharacterSpriteSheet()
-  position = {x = 1 * framewidth, y = 1 * framewidth}
-  characterDimensions = {h = 64, w = 64}
-  
-  objects = {
-  	teve = Tv.new({x=4*32, y=7*32}),
-  	tel = Tel.new({x=2*32, y=0}),
-  	leandro = Leandro.new({x=7*32,y=2*32}),
-  	switch = Switch.new({x=5*32, y=0})
-  }
-  
-  
-  love.window.setMode(900, 600, {resizable=true})
+Escenario = {
+	mapa = 'maps/map3.lua',
+	objetos = {
+  		teve = Tv.new({x=4*32, y=7*32}),
+  		tel = Tel.new({x=2*32, y=0}),
+  		leandro = Leandro.new({x=7*32,y=2*32}),
+  		switch = Switch.new({x=5*32, y=0})
+  	}
+}
 
-  message = " { LUA GAME } "
+function love.load()
+
+	loadMap('maps/map3.lua')
+	currentAnimation = loadCharacterSpriteSheet()
+	position = {x = 1 * framewidth, y = 1 * framewidth}
+	characterDimensions = {h = 64, w = 64}
+
+	objects = {
+		teve = Tv.new({x=4*32, y=7*32}),
+		tel = Tel.new({x=2*32, y=0}),
+		leandro = Leandro.new({x=7*32,y=2*32}),
+		switch = Switch.new({x=5*32, y=0})
+	}
+
+
+	love.window.setMode(900, 600, {resizable=true})
+
+	message = " { LUA GAME } "
 
 end
 
@@ -86,6 +97,7 @@ function love.update(dt)
 	  	message = ""
 	  	for k,v in ipairs(Animations) do v:update(dt) end
 	end
+	
 	-- position info
 	if isDown('i') then
 		print(getTile(newPosition))
@@ -93,7 +105,7 @@ function love.update(dt)
 		print("NEW POSITION x: ".. math.floor(newPosition.x/32).." y: ".. math.floor(newPosition.y/32))
 		print("TV x: ".. math.floor(teve.position.x/32).." y: ".. math.floor(teve.position.y/32))
 	end	
-	
+
 	position = newPosition 
 
 end
