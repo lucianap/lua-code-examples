@@ -29,19 +29,10 @@ Escenario = {
 
 function love.load()
 
-	loadMap('maps/map3.lua')
+	loadMap(Escenario.mapa)
 	currentAnimation = loadCharacterSpriteSheet()
 	position = {x = 1 * framewidth, y = 1 * framewidth}
 	characterDimensions = {h = 64, w = 64}
-
-	objects = {
-		teve = Tv.new({x=4*32, y=7*32}),
-		tel = Tel.new({x=2*32, y=0}),
-		leandro = Leandro.new({x=7*32,y=2*32}),
-		switch = Switch.new({x=5*32, y=0})
-	}
-
-
 	love.window.setMode(900, 600, {resizable=true})
 
 	message = " { LUA GAME } "
@@ -63,7 +54,7 @@ function love.draw()
 		end
 	end
 
-	for objectName, obj in pairs(objects) do
+	for objectName, obj in pairs(Escenario.objetos) do
 		obj:draw()
 	end
 
@@ -131,7 +122,7 @@ end
 
 function love.keypressed(key)
    if key == "return" then
-   		for objectName, obj in pairs(objects) do
+   		for objectName, obj in pairs(Escenario.objetos) do
    			if(isColliding(obj)) then
    				message = obj:interact()
    			end
