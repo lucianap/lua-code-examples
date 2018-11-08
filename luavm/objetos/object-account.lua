@@ -9,7 +9,7 @@ function Account:new ()
 end
 
 function Account.withdraw(self, amount)
-	self.balance = self.balance - amout
+	self.balance = self.balance - amount
 end
 
 -- Sytnactic sugar, los : te ahorran poner el self.
@@ -17,7 +17,8 @@ function Account:deposit(amount)
    self.balance = self.balance + amount
 end
 
-account = Account.new(account)
-account.withdraw(account)
+ ta = Account.new(Account)
+ ta:deposit(200)
+ ta.withdraw(ta, 100)
 
 return Account

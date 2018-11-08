@@ -1,4 +1,4 @@
-
+<script>
 function fib(num) {
   if (num <= 1) return 1;
 
@@ -35,3 +35,4 @@ console.timeEnd('fibIt');
 console.time('fibRT');
 fibRT(350);
 console.timeEnd('fibRT');
+</script>

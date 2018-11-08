@@ -4,15 +4,16 @@ local framewidth = 32
 local frameheight = 32
 
 -- Donde efectivamente se ejecuta la herencia
-local Switch = InteractiveObject:new('switch.png', 32, 32, 0, 0)
+local switch = InteractiveObject:new('switch.png', 32, 32, 0, 0)
 
 local anuncios = {}
 
 function Switch.new(position)
-  Switch.position = position
-  Switch.interact = Switch:getInteraction()
-  Switch.i = 0
-  return Switch
+  switch.position = position
+  switch.interact = Switch:getInteraction()
+  switch.i = 0
+  switch.setmetatable(switch, Switch)
+  return switch
 end
 
 function Switch:getInteraction()
@@ -27,7 +28,7 @@ function Switch:getInteraction()
 		else
 			on = false
 			love.graphics.setColor(1, 0, 0)
-			anuncio = "Cortaste toda la looz!" 
+			anuncio = "Cortaste toda la luz!" 
 		end
 		return anuncio
 	end

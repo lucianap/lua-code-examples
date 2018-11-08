@@ -132,6 +132,8 @@ function love.keypressed(key)
    		STEP = 2
    	elseif key == "l" then
    		STEP = 1
+   	elseif key == "1" then
+   		loadMap('maps/map2.lua')
    end
 end
 
