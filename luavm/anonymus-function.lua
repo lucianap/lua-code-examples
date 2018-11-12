@@ -1,11 +1,11 @@
 -- FUNCIONES
 
 -- Las funciones en lua son anónimas.
-a = {p = print}
-a.p("Hello World") --> llama a print
+p = print
+p("Hello World") --> llama a print
 print = math.sin -- print ahora apunta a la función seno 
-a.p(print(1))
-sin = a.p -- ’sin’ ahora contiene la función print
+p(print(1))
+sin = p -- ’sin’ ahora contiene la función print
 sin(10, 20)
 
 -- -------------------------------------------------

@@ -2,17 +2,21 @@ local InteractiveObject = require "InteractiveObject"
 
 local framewidth = 32
 local frameheight = 32
-local Tv = InteractiveObject:new('more-tiles.png', 32, 62, 11 * framewidth, 3 * (frameheight+2))
 
 local anuncios = {"TV: Se anuncia tiempo nublado.",
                   "TV: La línea E funciona con demoras.",
                   "TV: No hay futuro.",
                   "TV: ...."}
 
-function Tv.new(position)
-  Tv.position = position
-  Tv.i = 0
-  return Tv
+Tv = InteractiveObject:new('more-tiles.png', 32, 62, 11 * framewidth, 3 * (frameheight+2))
+
+function Tv:new(position)
+	local teve = {}
+  	teve.position = position
+  	teve.i = 0
+  	setmetatable(teve, self)
+  	self.__index = self
+  	return teve
 end
 
 function Tv:interact()

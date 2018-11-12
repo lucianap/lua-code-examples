@@ -4,15 +4,13 @@ local InteractiveObject = {}
 InteractiveObject.__index = InteractiveObject
 
 function InteractiveObject:new(imgPath, w, h, col, row) 
-
   if type(imgPath)=='string' then
     img=lg.newImage(imgPath)
   end
-
   imgWidth = img:getWidth()
   imgHeight = img:getHeight()
   local quad = getQuad(col, row, w, h, imgWidth, imgHeight)
-  local mt={img = img, 
+  local t={img = img, 
             imgw = imgWidth, 
             imgh = imgHeight, 
             width = w, 
@@ -21,9 +19,9 @@ function InteractiveObject:new(imgPath, w, h, col, row)
             position = {x = 0, y = 0},
             quad = quad
           }
-          
-  return setmetatable(mt, InteractiveObject)
-
+           
+  self.__index = self               
+  return setmetatable(t, self)
 end
 
 function InteractiveObject:draw()

@@ -9,7 +9,7 @@ end
 
 operacionCostosa = function()
 	print "voy a dormir"
-	sleep(7)
+	sleep(2)
 	return 4*4;
 end
 
@@ -17,7 +17,9 @@ end
 local t = {}
 local lazyLoader = {
 	__index =  function(tabla, valorRequerido)
-					tabla[valorRequerido] = operacionCostosa()
+					if(valorRequerido == 'costoso') then
+						tabla[valorRequerido] = operacionCostosa()
+					end
 					return tabla[valorRequerido]
 				end
 }

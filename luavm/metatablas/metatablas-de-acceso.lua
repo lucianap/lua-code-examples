@@ -1,3 +1,6 @@
+package.path = package.path .. ";../ansicolors.lua"
+local color = require 'ansicolors'
+
 -- Table-Access Metamethods
 -- Ejemplo: Creación con valores default
 -- INDEX METAMETHOD
@@ -12,4 +15,11 @@ end
 
 w = {x=10, y=20} -- los campos width y height quedan con los valores default
 setmetatable(w, mt)
-print(w.width)
+
+print(color.blue .. "Los campos width y height quedan con los valores default (toman los valores del prototipo)" .. color.reset)
+print(color.blue.."Width: "..color.reset..w.width)
+print(color.blue.."Height: "..color.reset..w.height)
+
+print(color.blue .. "Pero los valores x e y son los que nosotros seteamos" .. color.reset)
+print(color.blue.."X: "..color.reset..w.x)
+print(color.blue.."Y: "..color.reset..w.y)

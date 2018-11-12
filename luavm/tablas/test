@@ -1,0 +1,38 @@
+20
+programacion
+Foo
+Contenido del entorno
+[31mipairs[0m - Type of value: function
+[31mrawequal[0m - Type of value: function
+[31m_VERSION[0m - Type of value: string
+[31mloadfile[0m - Type of value: function
+[31mpairs[0m - Type of value: function
+[31mdofile[0m - Type of value: function
+[31m_G[0m - Type of value: table
+[31mt[0m - Type of value: table
+[31mmodule[0m - Type of value: function
+[31mrequire[0m - Type of value: function
+[31mnext[0m - Type of value: function
+[31mpcall[0m - Type of value: function
+[31mprint[0m - Type of value: function
+[31mvalue[0m - Type of value: function
+[31mkey[0m - Type of value: string
+[31medad[0m - Type of value: number
+[31mgetmetatable[0m - Type of value: function
+[31mmath[0m - Type of value: table
+[31mtostring[0m - Type of value: function
+[31mcollectgarbage[0m - Type of value: function
+[31marg[0m - Type of value: table
+[31mdebug[0m - Type of value: table
+[31mxpcall[0m - Type of value: function
+[31mansicolors[0m - Type of value: table
+[31mbit32[0m - Type of value: table
+[31mstring[0m - Type of value: table
+[31mos[0m - Type of value: table
+[31mio[0m - Type of value: table
+[31msetmetatable[0m - Type of value: function
+[31mloadstring[0m - Type of value: function
+[31mtype[0m - Type of value: function
+
+
+printf("\033[31;1;4mHello\033[0m");

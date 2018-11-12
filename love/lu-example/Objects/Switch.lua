@@ -4,16 +4,15 @@ local framewidth = 32
 local frameheight = 32
 
 -- Donde efectivamente se ejecuta la herencia
-local switch = InteractiveObject:new('switch.png', 32, 32, 0, 0)
+local Switch = InteractiveObject:new('switch.png', 32, 32, 0, 0)
 
 local anuncios = {}
 
 function Switch.new(position)
-  switch.position = position
-  switch.interact = Switch:getInteraction()
-  switch.i = 0
-  switch.setmetatable(switch, Switch)
-  return switch
+  Switch.position = position
+  Switch.interact = Switch:getInteraction()
+  Switch.i = 0
+  return Switch
 end
 
 function Switch:getInteraction()
