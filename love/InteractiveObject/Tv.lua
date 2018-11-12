@@ -11,13 +11,13 @@ local anuncios = {"TV: Se anuncia tiempo nublado.",
 Tv = InteractiveObject:new('more-tiles.png', 32, 62, 11 * framewidth, 3 * (frameheight+2))
 
 function Tv:new(position)
-	local teve = {}
-  	teve.position = position
-  	teve.i = 0
-  	setmetatable(teve, self)
-  	self.__index = self
-  	return teve
-end
+  local teve = {}
+  teve.position = position
+  teve.i = 0
+  setmetatable(teve, self)
+  self.__index = self
+  return teve
+end 
 
 function Tv:interact()
   local i = 1
