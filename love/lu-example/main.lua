@@ -20,7 +20,7 @@ local FIRST_FRAME = 0
 Escenario = {
 	mapa = 'maps/map3.lua',
 	objetos = {
-  		teve = Tv.new({x=4*32, y=7*32}),
+  		teve = Tv.new({x=1*32, y=1*32}),
   		tel = Tel.new({x=2*32, y=0}),
   		leandro = Leandro.new({x=7*32,y=2*32}),
   		switch = Switch.new({x=5*32, y=0})
@@ -34,7 +34,6 @@ function love.load()
 	position = {x = 1 * framewidth, y = 1 * framewidth}
 	characterDimensions = {h = 64, w = 64}
 	love.window.setMode(900, 600, {resizable=true})
-
 	message = " { LUA GAME } "
 
 end
@@ -58,9 +57,10 @@ function love.draw()
 		obj:draw()
 	end
 
-	font = love.graphics.newFont(30) 
+	font = love.graphics.newFont(20) 
 	love.graphics.setFont(font)
-	love.graphics.print(message, 10, 400)
+	local tileH = getMapHeight()
+	love.graphics.print(message, 10, tileH * 32)
 
 end
 
@@ -101,14 +101,6 @@ function love.update(dt)
 
 end
 
-function isCollidingWithAnyObject(allObjects)
-	for objectName, obj in pairs(allObjects) do
-   			if(isColliding(obj)) then
-   				return true
-   			end
-		end
-	return false
-end
 
 function isColliding(object)
 	if object then
@@ -134,6 +126,12 @@ function love.keypressed(key)
    		STEP = 1
    	elseif key == "1" then
    		loadMap('maps/map2.lua')
+   	elseif key == "2" then
+   		loadMap('maps/map3.lua')
+   	elseif key == "3" then
+   		loadMap('maps/map4.lua')
+   	elseif key == "4" then
+   		loadMap('maps/map5.lua')
    end
 end
 

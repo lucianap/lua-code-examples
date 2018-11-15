@@ -37,8 +37,6 @@ function newMap(tileWidth, tileHeight, tilesetPath, tileString, quadInfo)
     rowIndex=rowIndex+1
   end
 
-
-
   for columnIndex,column in ipairs(tileTable) do
     for rowIndex,char in ipairs(column) do
       print("x: "..columnIndex.." y: "..rowIndex.." value: "..char)
@@ -58,6 +56,10 @@ function drawMap()
       love.graphics.draw(tileset, quads[char], x, y)
     end
   end
+end
+
+function getMapHeight()
+  return #tileTable[1]
 end
 
 function getTile( position )

@@ -1,11 +1,13 @@
 package.path = package.path .. ";../ansicolors.lua"
 local color = require 'ansicolors'
+
+
 t = {} 
 
 -- tabla como array
-t = {1,2,3}
+t = {4,99,3}
 
--- tabla como record
+-- tabla como "record"
 t = {x = 1, y = 3}
 
 -- tabla como C structs con funciones
@@ -20,6 +22,7 @@ t = {
 }
 
 
+edad = t.edad(t, 2018)
 edad = t:edad(2018) -- 
 
 print(edad)

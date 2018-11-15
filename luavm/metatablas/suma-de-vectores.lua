@@ -1,5 +1,10 @@
 -- Arithmetic Metamethods
 
+vector1 = {1,2}
+vector2 = {6,2}
+
+-- v3 = vector1+vector2  -- Exception! 
+
 local mt = {} -- metatabla para vectores
 
 function vectorSumFunction(x, y)
@@ -21,9 +26,6 @@ end
 mt.__add = vectorSumFunction -- Le enseña a sumar a los vectores
 mt.__sub = vectorSubFunction
 
-vector1 = {1,2}
-vector2 = {6,2}
--- v3 = vector1+vector2  -- Exception! 
 setmetatable(vector1, mt)
 setmetatable(vector2, mt)
 vector3 = vector1+vector2

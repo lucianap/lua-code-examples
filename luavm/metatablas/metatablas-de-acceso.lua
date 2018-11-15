@@ -13,13 +13,13 @@ mt.__index = function (table, key) -- creación del metamethod index
 	return Window.prototype[key]
 end
 
-w = {x=10, y=20} -- los campos width y height quedan con los valores default
-setmetatable(w, mt)
+window1 = {x=10, y=20} -- los campos width y height quedan con los valores default
+setmetatable(window1, mt)
 
-print(color.blue .. "Los campos width y height quedan con los valores default (toman los valores del prototipo)" .. color.reset)
-print(color.blue.."Width: "..color.reset..w.width)
-print(color.blue.."Height: "..color.reset..w.height)
+print(color.yellow .. "Los campos width y height quedan con los valores default (toman los valores del prototipo)" .. color.reset)
+print("Width: "..window1.width)
+print("Height: "..window1.height)
 
-print(color.blue .. "Pero los valores x e y son los que nosotros seteamos" .. color.reset)
-print(color.blue.."X: "..color.reset..w.x)
-print(color.blue.."Y: "..color.reset..w.y)
+print(color.yellow .. "Pero los valores x e y son los que nosotros seteamos" .. color.reset)
+print("X: "..window1.x)
+print("Y: "..window1.y)

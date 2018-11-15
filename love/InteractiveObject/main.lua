@@ -19,7 +19,7 @@ function love.update(dt)
 end
 
 function love.draw()
-	love.graphics.scale(7, 7)   -- aumenta la escala de dibujo en 7%
+	love.graphics.scale(2, 2)   -- aumenta la escala de dibujo en 7%
 	teve:draw() 
 	love.graphics.print(message, 1, 80)
 end
