@@ -26,4 +26,4 @@ local lazyLoader = {
 
 setmetatable(t, lazyLoader)
 print(t.costoso)
-print(t.costoso)
+print(t.costoso)	

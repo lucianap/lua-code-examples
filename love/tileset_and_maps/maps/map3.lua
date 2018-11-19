@@ -1,16 +1,24 @@
 local tileString = [[
-NNNN
-NNNN
-aGaN
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+WGGGGGGGGGGGGGGGGGGGFGGGFFGFW
+WGGGGGGGGGGGGGGGGGGGFGFGFFGFW
+WGGGGGGGGGGGGGGGGGGGGGGGFFGFW
+WFGGGGGGGGGGGGGGGGGGGGGGGGGFW
+WFGGGGGGGGGGGGGGGFFFGGGGGGGFW
+WFGGGGGGGGGGGGGGGFFFGGGGGGGFW
+WFGGGGGGGGGGGGGGGFFFGGGGGGGFW
+WFGGGGGGGGGGGGGGGRRRGGGGGGGFW
+WFGGGGGGGGGGGGGGGGGGGGGGFFGFW
+WFGGGGGGGGGGGGGGGGGGGGGGFFGFW
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 ]]
 
+local frameSize = 32
 local quadInfo = { 
-  { 'N',  0,  0 }, -- gray floor
-  { 'G',  0, 96 }, -- brick wall
-  { 'a', 32,  0 }, -- castle top
-  { 'b', 32, 32 }, -- castle top 2
-  { 'c', 64,  0 }, -- castle bottom 1
-  { 'd', 64, 32 }, -- castle bottom 2
+  { 'G',  0,  0 }, --  grass
+  { 'F',  0,  32 }, -- flowers
+  { 'W', 32,  32 }, -- wood
+  { 'R', 32,   0 }  -- other wall 
 }
 
-newMap(15,15,'/images/lu-tiles.png', tileString, quadInfo)
+newMap(32,32,'/images/countryside.png', tileString, quadInfo)
