@@ -16,11 +16,12 @@ end
 -- Metatablas para operaciones lazy!
 local t = {}
 local lazyLoader = {
-	__index =  function(tabla, valorRequerido)
-					if(valorRequerido == 'costoso') then
-						tabla[valorRequerido] = operacionCostosa()
+	__index =  function(tabla, key)
+					if(key == 'costoso') then
+						tabla[key] = operacionCostosa()
+						return tabla[key]
 					end
-					return tabla[valorRequerido]
+					
 				end
 }
 

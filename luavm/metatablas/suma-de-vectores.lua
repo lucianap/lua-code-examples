@@ -29,7 +29,7 @@ mt.__sub = vectorSubFunction
 setmetatable(vector1, mt)
 setmetatable(vector2, mt)
 vector3 = vector1+vector2
-vector3 = vector2+vector1
+vector3 = vector2-vector1
 
 -- Los arrays empiezan en 1! (╯°□°）╯︵ ┻━┻
 print(vector3[1])

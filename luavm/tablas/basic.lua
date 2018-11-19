@@ -16,7 +16,7 @@ t = {}
 -- tabla como "record"
 t = {x = 1, y = 3}
 
-printTable(t)
+-- printTable(t)
 
 t.y = "otra cosa"
 t.nuevoAtributo = {k = 2, j = 8}
@@ -24,7 +24,7 @@ t.nuevoAtributo = {k = 2, j = 8}
 print("\n")
 -- print(t["nuevoAtributo"])
 -- print(t.nuevoAtributo)
--- print("\n")
+print("\n")
 
 t.y = nil
 

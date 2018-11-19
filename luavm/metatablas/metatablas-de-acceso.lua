@@ -23,3 +23,6 @@ print("Height: "..window1.height)
 print(color.yellow .. "Pero los valores x e y son los que nosotros seteamos" .. color.reset)
 print("X: "..window1.x)
 print("Y: "..window1.y)
+
+-- TAMBIEN PUEDE USARSE CON TABLAS! [ { ^ _ ^ }]
+mt.__index = Window.prototype
