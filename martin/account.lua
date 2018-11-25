@@ -19,14 +19,16 @@ function Account.__tostring(self)
   return "Saldo = " .. self.balance
 end
 
+---[[
 a = Account:new(100)
---print("a: ", a)
+print("a: ", a)
 
 b = Account:new(50)
---print("b: ", b)
---print("a(despues): ", a)
+print("b: ", b)
+print("a(despues): ", a)
 
 a:deposit(50)
---print(a)
+print(a)
 a:withdraw(50)
---print(a)
+print(a)
+--]]
