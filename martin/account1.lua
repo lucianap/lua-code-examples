@@ -16,7 +16,7 @@ end
 a = Account:new(100) --Account.new(Account, 100)
 print("Saldo de a: " .. a.balance)
 
---[[
+---[[
 b = Account:new(50)
 print("Saldo de b: " .. b.balance)
 print("Saldo de a (despues): " .. a.balance)

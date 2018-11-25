@@ -11,7 +11,7 @@ print(s.balance)
 -- redefinimos un metodo
 function SpecialAccount:withdraw (v)
 	if v - self.balance >= self:getLimit() then
-		error "Fondos insuficientes"
+		-- error "Fondos insuficientes"
 	end
 	self.balance = self.balance - v
 end

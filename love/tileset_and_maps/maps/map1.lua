@@ -7,9 +7,10 @@ local tileString = [[
 #                ###  ###
 #  L[]R   L[]R          #
 #  L()R   L()R    L[]R  #
+#  L()R   L()R    L[]R  #
+#  L()R   L()R    L[]R  #
 #                 L()R  #
 #                       #
-######L##########R#######
 #  L[]R   L[]R          #
 #  L()R   L()R   ###  ###
 #                #LL  RR#
@@ -19,8 +20,6 @@ local tileString = [[
 #                #LL  RR#
 #########################
 ]]
-
--- ######L##########R#######
 
 local quadInfo = { 
   { ' ',  0,  0 }, -- floor 
